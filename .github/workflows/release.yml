@@ -25,9 +25,5 @@ jobs:
       - name: Build and Push Docker Image
         run: |
           IMG=ghcr.io/${{ github.repository }}
-          docker build \
-            --tag $IMG:${{ env.version }} \
-            --tag $IMG:${{ env.version_major }}.${{ env.version_minor }}.latest \
-            --tag $IMG:${{ env.version_major }}.latest \
-            --tag $IMG:latest \
-            docker push --all-tags $IMG
+          docker build --tag $IMG:latest .
+          docker push --all-tags $IMG
