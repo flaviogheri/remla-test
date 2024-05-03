@@ -5,16 +5,16 @@ on:
     tags: ["v[0-9]+.[0-9]+.[0-9]+"]
 jobs:
   build:
-    runs-on : ubuntu-22.04
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       - name: Parse version info from tag
         run: |
-          # GITHUB_REF is like refs/tags/v2.3.5, so strip the first 11 chars
+          # GITHUB_REF is like refs/tags/v2.3.5, so strip the first 10 chars
           VERSION=${GITHUB_REF:10}
-          MAJOR='echo "$VERSION" | cut -d . -f 1'
-          MINOR='echo "$VERSION" | cut -d . -f 2'
-          PATCH='echo "$VERSION" | cut -d . -f 3'
+          MAJOR=$(echo "$VERSION" | cut -d. -f1)
+          MINOR=$(echo "$VERSION" | cut -d. -f2)
+          PATCH=$(echo "$VERSION" | cut -d. -f3)
           echo "version=$VERSION" >> $GITHUB_ENV
           echo "version_major=$MAJOR" >> $GITHUB_ENV
           echo "version_minor=$MINOR" >> $GITHUB_ENV
